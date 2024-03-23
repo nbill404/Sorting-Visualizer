@@ -7,7 +7,7 @@ interface Props {
 
 export default function Button({text, buttonDisabled: buttonActive, clickEvent}: Props) {
     return (
-        <button type="button" className="btn btn-info" onClick={clickEvent} disabled={buttonActive}>
+        <button type="button" className="btn btn-info w-100" onClick={clickEvent} disabled={buttonActive}>
             {text}
         </button>
     )

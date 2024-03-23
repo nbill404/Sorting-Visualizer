@@ -60,6 +60,10 @@ export default function App () {
     
   }, [isDisabled]);
 
+  useEffect(() =>  {
+    setNums(randomize(sortSize, 100));
+  }, [sortSize])
+
   const handleSortButton = () => {
     setIsDisabled(!isDisabled);
   }
@@ -84,31 +88,37 @@ export default function App () {
   return (
     <html>
       <body className='bg-light min-vh-100'> 
+        <div className='p-0 m-0'>
           <h1 className='text-center pt-2'>Sorting Visualizer</h1>
-          <div className="container border border-primary rounded-1 mt-4 px-3 pb-3 h-auto">
+          <div className="container border border-primary rounded-1 mt-4 px-3 pb-3 h-100">
             <Bars nums={nums} colour={barColour} size={sortSize} highlight={highlighted}/>
           </div>
-          <div className='container'>
-            <div className='row'>
-                <Slider sliderDisabled={isDisabled} changeEvent={getSliderValue}/>
-            </div>
-            <div className='row pt-2'>
-                <Select listValues={selectColours} changeEvent={handleSelectColour} selectDisabled={isDisabled}/>
-            </div>
-            <div className='row pt-2'>
-              <Select listValues={selectSorts} changeEvent={handleSelectSort} selectDisabled={isDisabled}/>
-            </div>
-          </div>
-          <div className="container mt-4 w-25">
+          <div className='container w-25 p-3'>
+            <div>
               <div className='row'>
-                <div className='col'>
-                  <Button text={isDisabled ? "Stop" : "Begin"} clickEvent={handleSortButton} buttonDisabled={false}/>
-                </div>
-                <div className='col'>
-                  <Button text="Randomize" clickEvent={handleRandomButton} buttonDisabled={isDisabled}/>
+                  <Slider sliderDisabled={isDisabled} changeEvent={getSliderValue}/>
+              </div>
+              <div className='row pt-1'>
+                <p className='fw-semibold'>List Size = {sortSize}</p>
+              </div>
+              <div className='row pt-1'>
+                  <Select listValues={selectColours} changeEvent={handleSelectColour} selectDisabled={isDisabled}/>
+              </div>
+                <div className='row pt-2'>
+                  <Select listValues={selectSorts} changeEvent={handleSelectSort} selectDisabled={isDisabled}/>
                 </div>
               </div>
-          </div>
+            </div>
+            <div className='row'>
+              <div className='col-1 offset-md-5'>
+                <Button text={isDisabled ? "Stop" : "Begin"} clickEvent={handleSortButton} buttonDisabled={false}/>
+              </div>
+              <div className='col-1'>
+                <Button text="Randomize" clickEvent={handleRandomButton} buttonDisabled={isDisabled}/>
+              </div>
+            </div>
+
+        </div>
     </body>
   </html>
   );
