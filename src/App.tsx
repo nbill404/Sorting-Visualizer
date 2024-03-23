@@ -62,7 +62,6 @@ export default function App () {
 
   const handleSortButton = () => {
     setIsDisabled(!isDisabled);
-    console.log("test");
   }
 
   const getSliderValue = (e) => {
@@ -84,32 +83,32 @@ export default function App () {
 
   return (
     <html>
-      <body className="bg-light">
-        <h1 className='text-center pt-2'>Sorting Visualizer</h1>
-        <div className="container border border-primary rounded-1 mt-4 px-3 pb-3">
-          <Bars nums={nums} colour={barColour} size={sortSize} highlight={highlighted}/>
-        </div>
-        <div className='container'>
-          <div className='row'>
-              <Slider sliderDisabled={isDisabled} changeEvent={getSliderValue}/>
+      <body className='bg-light min-vh-100'> 
+          <h1 className='text-center pt-2'>Sorting Visualizer</h1>
+          <div className="container border border-primary rounded-1 mt-4 px-3 pb-3 h-auto">
+            <Bars nums={nums} colour={barColour} size={sortSize} highlight={highlighted}/>
           </div>
-          <div className='row pt-2'>
-              <Select listValues={selectColours} changeEvent={handleSelectColour} selectDisabled={isDisabled}/>
-          </div>
-          <div className='row pt-2'>
-            <Select listValues={selectSorts} changeEvent={handleSelectSort} selectDisabled={isDisabled}/>
-          </div>
-        </div>
-        <div className="container mt-4">
+          <div className='container'>
             <div className='row'>
-              <div className='col'>
-                <Button text={isDisabled ? "Stop" : "Begin"} clickEvent={handleSortButton} buttonDisabled={false}/>
-              </div>
-              <div className='col'>
-                <Button text="Randomize" clickEvent={handleRandomButton} buttonDisabled={isDisabled}/>
-              </div>
+                <Slider sliderDisabled={isDisabled} changeEvent={getSliderValue}/>
             </div>
-        </div>
+            <div className='row pt-2'>
+                <Select listValues={selectColours} changeEvent={handleSelectColour} selectDisabled={isDisabled}/>
+            </div>
+            <div className='row pt-2'>
+              <Select listValues={selectSorts} changeEvent={handleSelectSort} selectDisabled={isDisabled}/>
+            </div>
+          </div>
+          <div className="container mt-4 w-25">
+              <div className='row'>
+                <div className='col'>
+                  <Button text={isDisabled ? "Stop" : "Begin"} clickEvent={handleSortButton} buttonDisabled={false}/>
+                </div>
+                <div className='col'>
+                  <Button text="Randomize" clickEvent={handleRandomButton} buttonDisabled={isDisabled}/>
+                </div>
+              </div>
+          </div>
     </body>
   </html>
   );
