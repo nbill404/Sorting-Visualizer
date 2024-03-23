@@ -19,5 +19,4 @@ Use the following command to install dependencies using NodeJs.
 
 ```js
 npm install
-}
 ```

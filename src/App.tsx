@@ -30,13 +30,13 @@ export default function App () {
   const [barColour, setBarColour] = useState("#cfc");
   const [nums, setNums] = useState(randomize(100, 100));
   const [highlighted, setHighlighted] = useState([-1, -1]);
-  const [isDisabled, setIsDisabled] = useState(false);
+  const [isRunning, setIsRunning] = useState(false);
   const [sortFunc, setSortFunc] = useState("selectionsort");
 
   useEffect(() => {
     let mounted = true;
 
-    if (isDisabled) {
+    if (isRunning) {
       (async () => {
         let l = Object.assign([], nums.slice(-sortSize));
         const generator = getSort(sortFunc, l);
@@ -52,20 +52,20 @@ export default function App () {
         }
       
         setHighlighted([-1, -1]);
-        setIsDisabled(false);
+        setIsRunning(false);
       })();
     }
 
     return () => mounted = false;
     
-  }, [isDisabled]);
+  }, [isRunning]);
 
   useEffect(() =>  {
     setNums(randomize(sortSize, 100));
   }, [sortSize])
 
   const handleSortButton = () => {
-    setIsDisabled(!isDisabled);
+    setIsRunning(!isRunning);
   }
 
   const getSliderValue = (e) => {
@@ -85,40 +85,49 @@ export default function App () {
     setSortFunc(e.target.value);
   }
 
+  var dot = {
+    width: "25px",
+    height: "25px",
+  };
+
   return (
     <html>
-      <body className='bg-light min-vh-100'> 
-        <div className='p-0 m-0'>
+      <body className='bg-light vh-100'> 
+        <div className='h-100'>
+          
           <h1 className='text-center pt-2'>Sorting Visualizer</h1>
-          <div className="container border border-primary rounded-1 mt-4 px-3 pb-3 h-100">
+          
+          <div className="container border border-primary rounded-1 mt-4 p-3 h-50">
+            <div className={(isRunning ? 'bg-success': 'bg-danger') + ' rounded-circle position-sticky start-100'} style={dot}/>
+            <p className='text-end'>{isRunning ? "Running: " + sortFunc : "Not Running"}</p>
             <Bars nums={nums} colour={barColour} size={sortSize} highlight={highlighted}/>
           </div>
+          
           <div className='container w-25 p-3'>
-            <div>
               <div className='row'>
-                  <Slider sliderDisabled={isDisabled} changeEvent={getSliderValue}/>
+                  <Slider sliderDisabled={isRunning} changeEvent={getSliderValue}/>
               </div>
               <div className='row pt-1'>
                 <p className='fw-semibold'>List Size = {sortSize}</p>
               </div>
               <div className='row pt-1'>
-                  <Select listValues={selectColours} changeEvent={handleSelectColour} selectDisabled={isDisabled}/>
+                  <Select listValues={selectColours} changeEvent={handleSelectColour} selectDisabled={isRunning}/>
               </div>
                 <div className='row pt-2'>
-                  <Select listValues={selectSorts} changeEvent={handleSelectSort} selectDisabled={isDisabled}/>
+                  <Select listValues={selectSorts} changeEvent={handleSelectSort} selectDisabled={isRunning}/>
                 </div>
               </div>
-            </div>
+            
             <div className='row'>
               <div className='col-1 offset-md-5'>
-                <Button text={isDisabled ? "Stop" : "Begin"} clickEvent={handleSortButton} buttonDisabled={false}/>
+                <Button text={isRunning ? "Stop" : "Begin"} clickEvent={handleSortButton} buttonDisabled={false}/>
               </div>
               <div className='col-1'>
-                <Button text="Randomize" clickEvent={handleRandomButton} buttonDisabled={isDisabled}/>
+                <Button text="Randomize" clickEvent={handleRandomButton} buttonDisabled={isRunning}/>
               </div>
             </div>
 
-        </div>
+          </div>
     </body>
   </html>
   );

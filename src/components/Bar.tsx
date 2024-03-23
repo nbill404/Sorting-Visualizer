@@ -10,10 +10,9 @@ export default function Bar({w, h, backgroundColour, idx} : Props) {
         width: w.toString() + "px",
         height: h.toString() + "px",
         background: backgroundColour,
-        display: "inline-block"
     }
 
     return (
-        <div style={properties} id={"bar-" + idx}/>
+        <div className="d-inline-block" style={properties} id={"bar-" + idx}/>
     )
 }

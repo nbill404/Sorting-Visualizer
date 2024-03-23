@@ -16,15 +16,12 @@ function getWidth(size: number) {
 export default function Bars({colour, size, nums, highlight}: Props) {
     nums = nums.slice(-size);
     let width = getWidth(size);
-
     
     return (
-        <div className="mt-4">
+        <div className="position-sticky mt-4 top-100">
         {nums.map((num, i) => 
-            i === highlight[0] || i === highlight[1]
-            ? <Bar w={width} h={num * 3} backgroundColour={"#f333ff"} idx={i}/>
-            : <Bar w={width} h={num * 3} backgroundColour={colour} idx={i}/>  
-            )}
+            <Bar w={width} h={num * 3} backgroundColour={i === highlight[0] || i === highlight[1] ? "#f333ff" : colour} idx={i}/>  
+        )}
         </div>
     )
 }
