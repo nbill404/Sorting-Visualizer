@@ -62,6 +62,7 @@ export default function App () {
 
   const handleSortButton = () => {
     setIsDisabled(!isDisabled);
+    console.log("test");
   }
 
   const getSliderValue = (e) => {
