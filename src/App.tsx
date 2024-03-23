@@ -34,9 +34,11 @@ export default function App () {
   const [sortFunc, setSortFunc] = useState("selectionsort");
 
   useEffect(() => {
+    // Start/Stop function
     let mounted = true;
 
     if (isRunning) {
+      // Run visualizer
       (async () => {
         let l = Object.assign([], nums.slice(-sortSize));
         const generator = getSort(sortFunc, l);
