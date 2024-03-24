@@ -34,7 +34,7 @@ export default function App () {
   const [sortFunc, setSortFunc] = useState("selectionsort");
 
   useEffect(() => {
-    // Start/Stop function
+    // Allows for starting and stopping of async function
     let mounted = true;
 
     if (isRunning) {
@@ -45,7 +45,7 @@ export default function App () {
 
         for (const v of generator) {
           if (mounted) {
-            await sleep(20);
+            await sleep(1);
             setNums(l);
             setHighlighted(v);
           } else {
@@ -71,7 +71,7 @@ export default function App () {
   }
 
   const getSliderValue = (e) => {
-    setSortSize(e.target.value * 10); // Range 10 - 100
+    setSortSize(e.target.value * 10); // Range 10 - 1000
   }
 
   const handleRandomButton = () => {

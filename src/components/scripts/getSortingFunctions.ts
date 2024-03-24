@@ -10,7 +10,7 @@ import { shellsort } from './shellsort';
 import { combsort } from './combsort';
 
 export function getSort(s: string, nums: number[]) : Generator<number[], void, unknown>{
-    // This will ensure functions are imported properly to be able to call them // eval doesn't work
+    // This will ensure functions are imported properly to be able to call them // eval doesn't work if not previously referenced
     switch (s) {
       case "selectionsort": 
         return selectionsort(nums);

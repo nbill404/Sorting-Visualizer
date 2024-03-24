@@ -8,7 +8,7 @@ interface Props {
 }
 
 function getWidth(size: number) {
-    // Max width before overflow
+    // Max width before inline overflow
     let width = 1278 / size;
 
     return width;
